@@ -1,0 +1,39 @@
+extract_transcript_task:
+  description: >
+    Extraire la transcription de la vidéo YouTube avec l'ID : {video_id}
+    Nettoyer la transcription et la préparer pour l'extraction de recette.
+    Se concentrer sur l'identification du contenu lié à la cuisine, les ingrédients mentionnés,
+    et les instructions étape par étape.
+    IMPORTANT: Capturer EXACTEMENT tous les ingrédients et toutes les instructions tels qu'ils sont mentionnés dans la vidéo.
+  expected_output: >
+    Une transcription propre et bien formatée de la vidéo YouTube avec les instructions
+    de cuisine et les ingrédients clairement identifiés, en préservant EXACTEMENT toutes les informations
+    mentionnées dans la vidéo sans rien omettre.
+  agent: transcript_extractor
+
+write_recipe_task:
+  description: >
+    Sur la base de la transcription fournie, créer une recette complète EN FRANÇAIS avec les sections suivantes :
+    - Titre de la recette
+    - Description
+    - Temps de préparation et temps de cuisson si mentionnés
+    - Portions si mentionnées
+    - Liste des ingrédients avec les mesures
+    - Instructions étape par étape
+    - Tous conseils ou notes mentionnés dans la vidéo
+    
+    RÈGLE ABSOLUE: La recette doit STRICTEMENT respecter les ingrédients et instructions de la vidéo.
+    N'AJOUTEZ AUCUN ingrédient qui n'est pas mentionné dans la vidéo.
+    NE MODIFIEZ AUCUNE instruction ou quantité.
+    NE SUPPRIMEZ AUCUN ingrédient ou étape mentionné dans la vidéo.
+    Utilisez UNIQUEMENT les informations présentes dans la transcription fournie.
+    
+    Assurez-vous que la recette est claire, bien organisée et facile à suivre.
+    LA RECETTE ENTIÈRE DOIT ÊTRE ÉCRITE EN FRANÇAIS.
+  expected_output: >
+    Une recette complète formatée en markdown sans '```', écrite entièrement en français,
+    incluant le titre, la description, la liste des ingrédients, les instructions détaillées étape par étape,
+    et tous conseils ou notes pertinents.
+    La recette doit être une reproduction FIDÈLE et EXACTE du contenu de la vidéo,
+    sans aucun ajout, modification ou omission d'ingrédients ou d'instructions.
+  agent: recipe_writer
